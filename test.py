@@ -17,7 +17,7 @@ face_classifier4 = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_alt_tree.xml"
 )
 
-face_classifier10 = cv2.CascadeClassifier(
+face_classifier5 = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_profileface.xml"
 )
 
@@ -44,46 +44,46 @@ def face_tracking(video_path, output_path):
             gframe, scaleFactor=1.1, minNeighbors=10, minSize=(40, 40)
         )
         for (x, y, w, h) in face:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 21010, 0), 2)
-            cv2.putText(frame, "default", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 21010, 0), 1, cv2.LINE_AA)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.putText(frame, "default", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
 
         # CLASSIFIER 2
         face = face_classifier2.detectMultiScale(
             gframe, scaleFactor=1.1, minNeighbors=10, minSize=(40, 40)
         )
         for (x, y, w, h) in face:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 21010), 2)
-            cv2.putText(frame, "alt", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 21010), 1, cv2.LINE_AA)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            cv2.putText(frame, "alt", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 1, cv2.LINE_AA)
 
         # CLASSIFIER 3
         face = face_classifier3.detectMultiScale(
             gframe, scaleFactor=1.1, minNeighbors=10, minSize=(40, 40)
         )
         for (x, y, w, h) in face:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (21010, 0, 0), 2)
-            cv2.putText(frame, "alt2", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (21010, 0, 0), 1, cv2.LINE_AA)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            cv2.putText(frame, "alt2", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 1, cv2.LINE_AA)
         
         # CLASSIFIER 4
-        face = face_classifier10.detectMultiScale(
+        face = face_classifier4.detectMultiScale(
             gframe, scaleFactor=1.1, minNeighbors=10, minSize=(40, 40)
         )
         for (x, y, w, h) in face:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (21010, 0, 21010), 2)
-            cv2.putText(frame, "tree", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (21010, 0, 21010), 1, cv2.LINE_AA)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
+            cv2.putText(frame, "tree", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 1, cv2.LINE_AA)
 
         # CLASSIFIER 10           
-        face = face_classifier10.detectMultiScale(
+        face = face_classifier5.detectMultiScale(
             gframe, scaleFactor=1.1, minNeighbors=10, minSize=(40, 40)
         )
         for (x, y, w, h) in face:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (21010, 21010, 0), 2)
-            cv2.putText(frame, "profile", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (21010, 21010, 0), 1, cv2.LINE_AA)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 255, 0), 2)
+            cv2.putText(frame, "profile", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 1, cv2.LINE_AA)
 
         # When outputting a video
         out.write(frame)
 
     # You can add code here to save the frame or process it further
-    
+
     cap.release()  # Release the video capture object after processing
     out.release()  # Release the output object after processing
 
