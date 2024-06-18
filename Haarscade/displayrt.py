@@ -39,13 +39,13 @@ def face_tracking(video_path):
         for (x, y, w, h) in face:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, "default", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
-            
+
         # Display the processed frame
         cv2.imshow("Face Tracking", frame)
 
-        # Use a key press to exit (e.g., 'q' or 'Esc')
+        # Use a key press to exit
         key = cv2.waitKey(1) & 0xFF
-        if key == ord("q") or key == 27:  # 'q' or 'Esc'
+        if key == ord("q") or key == 27:  
             break
 
     cap.release()
