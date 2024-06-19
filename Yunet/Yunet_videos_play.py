@@ -3,11 +3,21 @@ import numpy as np
 
 
 
-def face_tracking(video_path, color, box_thickness, radius, landmarks_thickness, text_scale, text_thickness, font):
+def face_tracking(video_path, 
+                  color, 
+                  threshold, 
+                  box_thickness, 
+                  radius, 
+                  landmarks_thickness, 
+                  text_scale, 
+                  text_thickness, 
+                  font
+                  ):
+    
     capture = cv2.VideoCapture(video_path)
     model_path = "./Yunet/Models/face_detection_yunet_2023mar.onnx"
 
-    face_detector = cv2.FaceDetectorYN_create(model_path, "", (0, 0), 0.7)
+    face_detector = cv2.FaceDetectorYN_create(model_path, "", (0, 0), threshold)
 
     while True:
         ret, image = capture.read()
@@ -50,13 +60,15 @@ def face_tracking(video_path, color, box_thickness, radius, landmarks_thickness,
     cv2.destroyAllWindows()
 
 # Load the video
-video_path = "./Seizure_videos/seizuremp4.mp4"
-color = (0, 255, 0)
-box_thickness = 2
-radius = 3
-landmarks_thickness = -1
-text_scale = 1
-text_thickness = 1
-font = cv2.FONT_HERSHEY_PLAIN
-
-face_tracking(video_path, color, box_thickness, radius, landmarks_thickness, text_scale, text_thickness, font)
+face_tracking(
+    video_path = "./Seizure_videos/seizuremp4.mp4",
+    output_path = "./Seizure_videos/yunet_tracking_output2.mp4",
+    threshold = 0.65,
+    color = (0, 255, 0),
+    box_thickness = 2,
+    radius = 3,
+    landmarks_thickness = -1,
+    text_scale = 1,
+    text_thickness = 1,
+    font = cv2.FONT_HERSHEY_PLAIN
+)
