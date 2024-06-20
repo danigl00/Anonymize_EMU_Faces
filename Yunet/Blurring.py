@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 
 
-
 def face_tracking(video_path, 
                   color, 
                   threshold,
@@ -40,11 +39,15 @@ def face_tracking(video_path,
 
         for face in faces:
             box = list(map(int, face[:4]))
-            cv2.rectangle(image, box, color, box_thickness)
+            roi = image[int(face[1]):(int(face[1])+int(face[3])), int(face[0]):(int(face[0])+int(face[2]))]
+            blurred_face = cv2.GaussianBlur(roi, (31,31), 5)
+            image[int(face[1]):(int(face[1])+int(face[3])), int(face[0]):(int(face[0])+int(face[2]))] = blurred_face
+      
+            #cv2.rectangle(image, box, color, box_thickness)
             landmarks = list(map(int, face[4:len(face)-1]))
             landmarks = np.array_split(landmarks, len(landmarks) / 2)
-            for landmark in landmarks:
-                cv2.circle(image, landmark, radius, color, landmarks_thickness, cv2.LINE_AA)             
+            #for landmark in landmarks:
+                #cv2.circle(image, landmark, radius, color, landmarks_thickness, cv2.LINE_AA)             
             confidence = face[-1]
             confidence = "{:.2f}".format(confidence)
             position = (box[0], box[1] - 10) 
